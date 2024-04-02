@@ -5,7 +5,9 @@ export function generateQr(productData) {
       const response = await fetch("http://localhost:5000/component/create", {
         method: "POST",
         body: JSON.stringify(productData),
-        headers: { "content-type": "application/json" },
+        headers: { "content-type": "application/json",
+                    "Authorization" : localStorage.getItem("token")
+                  },
       });
 
       const data = await response.json();
@@ -20,7 +22,9 @@ export function generateQr(productData) {
 export function fetchProducts() {
   return new Promise(async (resolve, reject) => {
     try {
-      const response = await fetch("http://localhost:5000/component/fetch");
+      const response = await fetch("http://localhost:5000/component/fetch",{headers: { "content-type": "application/json",
+                    "Authorization" : localStorage.getItem("token")
+                  }});
 
       const data = await response.json();
       console.log(data);
@@ -33,11 +37,17 @@ export function fetchProducts() {
 
 export function scanQr(productData) {
   return new Promise(async (resolve) => {
-    const response = await fetch("http://localhost:5000/component/dispatch/" + productData.id, {
-      method: "PATCH",
-      body: JSON.stringify(productData),
-      headers: { "content-type": "application/json" },
-    });
+    const response = await fetch(
+      "http://localhost:5000/component/dispatch/" + productData.id,
+      {
+        method: "PATCH",
+        body: JSON.stringify(productData),
+        headers: {
+          "content-type": "application/json",
+          "Authorization": localStorage.getItem("token"),
+        },
+      }
+    );
     // console.log(response);
     const data = await response.json();
 
@@ -49,7 +59,13 @@ export function deleteProduct(id) {
   return new Promise(async (resolve) => {
     const response = await fetch(
       "http://localhost:5000/component/delete/" + id,
-      { method: "DELETE", headers: { "content-type": "application/json" } }
+      {
+        method: "DELETE",
+        headers: {
+          "content-type": "application/json",
+          "Authorization": localStorage.getItem("token"),
+        },
+      }
     );
     // console.log(response);
     const data = await response.json();

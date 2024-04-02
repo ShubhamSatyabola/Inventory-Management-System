@@ -1,6 +1,6 @@
 
 import { useEffect, useState } from "react";
-import { MdEdit, MdDelete } from "react-icons/md";
+import {  MdDelete } from "react-icons/md";
 import QRCode from "qrcode";
 import { Link, useNavigate } from "react-router-dom";
 import {  useDispatch, useSelector } from "react-redux";
@@ -167,9 +167,9 @@ export function Dashboard(){
                     Admin :{" "}
                   </div>
                   <div className="sm:col-span-2 lg:col-span-1 flex text-2xl">
-                    <Link to={`/edit/${item.id}`}>
+                    {/* <Link to={`/edit/${item.id}`}>
                       <MdEdit className="cursor-pointer m-3" />
-                    </Link>
+                    </Link> */}
                     {user ? (
                       <MdDelete
                         onClick={() => handleDelete(item.id)}

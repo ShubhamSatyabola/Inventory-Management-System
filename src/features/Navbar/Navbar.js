@@ -1,15 +1,16 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { IoMenu } from "react-icons/io5";
-import { selectLoggedInUser , logoutUserAsync } from "../auth/authSlice";
+import { selectLoggedInUser , logoutUserAsync} from "../auth/authSlice";
 import { useDispatch, useSelector } from "react-redux";
 
 export function Navbar(){
 
   const [showMenu, setShowMenu] = useState(false);
   
-  const user = useSelector(selectLoggedInUser);
+  
   const dispatch = useDispatch();
+  const user = useSelector(selectLoggedInUser)
   const handleMenuClick = () => {
     setShowMenu((prevState) => !prevState);
   };

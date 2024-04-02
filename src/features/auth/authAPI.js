@@ -10,6 +10,7 @@ export function createUser(userData) {
       //  console.log(response);
       if (response.ok) {
         const data = await response.json();
+        localStorage.setItem("token", data.token);
         resolve({ data });
       } 
     } catch (error) {
@@ -28,6 +29,7 @@ export function checkUser(loginInfo) {
       });
       if (response.ok) {
         const data = await response.json();
+        localStorage.setItem("token", data.token);
         // console.log(data);
         resolve({ data });
       } else {
@@ -43,8 +45,9 @@ export function checkUser(loginInfo) {
 
 
 
-export function logoutUser(userId) {
+export function logoutUser() {
   return new Promise(async (resolve) => {
+    localStorage.clear("token")
     resolve({ data: "success" });
   });
 }
